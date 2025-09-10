@@ -46,7 +46,7 @@ for row in rows:
 
 sqlstr = '''SELECT carat_18 FROM rate ORDER BY date DESC LIMIT 10'''
 
-for row in cur.execute(sqlstr):
-    print(str(row[0]))
-cur.close()
+# for row in cur.execute(sqlstr):
+#     print(str(row[0]))
+# cur.close()
 

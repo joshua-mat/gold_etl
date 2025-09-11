@@ -29,7 +29,7 @@ for i in range(len(rows)):
     if date == today and not rowExists:
         cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18) 
                VALUES ( ?,?,?,?,? )''', (date, twoFourC, twoTwoC, twoOneC, oneEightC))
-        print(f"✅ Updated DB with {today}")
+        print(f"✅ Updated DB with {today} rate for 18 c is {oneEightC}")
     else:
         print("todays date already updated")
     conn.commit()
@@ -42,34 +42,8 @@ cur.execute("""
         LIMIT 20
     )
     """)
+sqlstr = "SELECT carat_18 FROM rate WHERE date = ?"
+for row in cur.execute(sqlstr, (today,)):
+    print(str(row[0]))
 conn.commit()
-conn.close()
-
-
-
-# for row in rows:
-#     cells = row.find_all('td')
-#     date = format_date(cells[0].text)
-#     twoFourC = cells[1].text
-#     twoTwoC = cells[2].text
-#     twoOneC = cells[3].text
-#     oneEightC = cells[4].text
-#     ## input into database
-#     if date == today and not rowExists:
-#         cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18)
-#                VALUES ( ?,?,?,?,? )''', (date, twoFourC, twoTwoC, twoOneC, oneEightC))
-#         print(f"✅ Updated DB with {today}")
-#     else:
-#         print("todays date already updated")
-#
-#     conn.commit()
-# cur.execute("""
-#     DELETE FROM rate
-#     WHERE date NOT IN (
-#         SELECT date FROM rate
-#         ORDER BY date DESC
-#         LIMIT 20
-#     )
-#     """)
-# conn.commit()
-# conn.close()
+cur.close()

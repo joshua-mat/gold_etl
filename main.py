@@ -1,17 +1,13 @@
-from bs4 import BeautifulSoup
 from datetime import datetime
-import requests, re, sqlite3
 
-def format_date(raw_date):
-    cleaned_date = re.sub(r'(st|nd|rd|th)', '', raw_date)
-    cleaned_date = cleaned_date.replace("Sept", "Sep")
-    # Parse to datetime
-    date_obj = datetime.strptime(cleaned_date.strip(), "%d %b %Y")
-    formatted_date = date_obj.strftime("%Y-%m-%d")
-    return formatted_date
+from bs4 import BeautifulSoup
+from utils import format_date
+import requests, sqlite3
 
 conn = sqlite3.connect('au_rate.sqlite')
 cur = conn.cursor()
+today = datetime.today().strftime("%Y-%m-%d")
+print("today", today)
 
 cur.executescript('''
 CREATE TABLE IF NOT EXISTS rate (
@@ -39,7 +35,10 @@ for row in rows:
     twoOneC = cells[3].text
     oneEightC = cells[4].text
     ## input into database
-    cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18) 
+    print("date", date)
+    if date != today:
+        print("date in loop",date)
+        cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18) 
                VALUES ( ?,?,?,?,? )''', (date, twoFourC, twoTwoC, twoOneC, oneEightC))
 
     conn.commit()

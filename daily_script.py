@@ -1,6 +1,6 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
-from main import format_date
+from utils import format_date
 import sqlite3, re
 import requests
 
@@ -8,6 +8,8 @@ conn = sqlite3.connect('au_rate.sqlite')
 cur = conn.cursor()
 
 today = datetime.today().strftime("%Y-%m-%d")
+
+print(f"Script started at {datetime.now()}")
 
 url = "https://gulfnews.com/gold-forex/historical-gold-rates"
 response = requests.get(url)
@@ -27,7 +29,7 @@ for i in range(len(rows)):
     twoOneC = cells[3].text
     oneEightC = cells[4].text
     if date == today and not rowExists:
-        cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18) 
+        cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18)
                VALUES ( ?,?,?,?,? )''', (date, twoFourC, twoTwoC, twoOneC, oneEightC))
         print(f"✅ Updated DB with {today} rate for 18 c is {oneEightC}")
     else:
@@ -42,7 +44,7 @@ cur.execute("""
         LIMIT 20
     )
     """)
-sqlstr = "SELECT carat_18 FROM rate WHERE date = ?"
+sqlstr = "SELECT date, carat_18 FROM rate WHERE date = ?"
 for row in cur.execute(sqlstr, (today,)):
     print(str(row[0]))
 conn.commit()

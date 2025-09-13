@@ -1,12 +1,4 @@
-/bin/sh: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3/path/to/daily_gold_updater.py: Not a directory
-/bin/sh: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3/path/to/daily_gold_updater.py: Not a directory
-/bin/sh: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3/path/to/daily_gold_updater.py: Not a directory
+
+/Users/joshua/py/gold_price
+Script started at 2025-09-13 13:54:01.065832
 todays date already updated
-todays date already updated
-todays date already updated
-Script started at 2025-09-12 18:12:00.647476
-✅ Updated DB with 2025-09-12 rate for 18 c is 334.75
-2025-09-12
-Script started at 2025-09-12 18:13:00.811483
-todays date already updated
-2025-09-12

@@ -1,10 +1,13 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
 from utils import format_date
-import sqlite3, re
-import requests
+import sqlite3,os, requests
 
-conn = sqlite3.connect('au_rate.sqlite')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print(BASE_DIR)
+DB_PATH = os.path.join(BASE_DIR, "au_rate.sqlite")
+
+conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
 
 today = datetime.today().strftime("%Y-%m-%d")
@@ -44,8 +47,8 @@ cur.execute("""
         LIMIT 20
     )
     """)
-sqlstr = "SELECT date, carat_18 FROM rate WHERE date = ?"
-for row in cur.execute(sqlstr, (today,)):
-    print(str(row[0]))
-conn.commit()
+# sqlstr = "SELECT date, carat_18 FROM rate WHERE date = ?"
+# for row in cur.execute(sqlstr, (today,)):
+#     print(str(row[0]))
+# conn.commit()
 cur.close()

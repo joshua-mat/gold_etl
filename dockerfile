@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r rq.txt
 COPY . .
 
 # Default command (can be overridden by cron)
-CMD ["python3", "daily_script.py"]
+CMD ["python3", "scripts/daily_script.py"]

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from utils import format_date
 import requests, sqlite3
 
-conn = sqlite3.connect('au_rate.sqlite')
+conn = sqlite3.connect('../au_rate.sqlite')
 cur = conn.cursor()
 today = datetime.today().strftime("%Y-%m-%d")
 print("today", today)

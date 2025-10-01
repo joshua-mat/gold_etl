@@ -35,9 +35,7 @@ for row in rows:
     twoOneC = cells[3].text
     oneEightC = cells[4].text
     ## input into database
-    print("date", date)
     if date != today:
-        print("date in loop",date)
         cur.execute('''INSERT OR IGNORE INTO rate (date, carat_24, carat_22, carat_21, carat_18) 
                VALUES ( ?,?,?,?,? )''', (date, twoFourC, twoTwoC, twoOneC, oneEightC))
 

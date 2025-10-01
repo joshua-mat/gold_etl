@@ -5,7 +5,7 @@ import sqlite3,os, requests
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
-DB_PATH = os.path.join(BASE_DIR, "au_rate.sqlite")
+DB_PATH = os.path.join(BASE_DIR, "../au_rate.sqlite")
 
 conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
